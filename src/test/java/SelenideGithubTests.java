@@ -21,17 +21,18 @@ public class SelenideGithubTests {
             $(".wiki-more-pages [href='/selenide/selenide/wiki/SoftAssertions']").shouldHave(text("SoftAssertions"));
             $(".wiki-more-pages [href='/selenide/selenide/wiki/SoftAssertions']").click();
             String junit5CodeExample =
-                    "@ExtendWith({SoftAssertsExtension.class})\n" +
-                            "class Tests {\n" +
-                            "  @Test\n" +
-                            "  void test() {\n" +
-                            "    Configuration.assertionMode = SOFT;\n" +
-                            "    open(\"page.html\");\n" +
-                            "\n" +
-                            "    $(\"#first\").should(visible).click();\n" +
-                            "    $(\"#second\").should(visible).click();\n" +
-                            "  }\n" +
-                            "}";
+                    """
+                            @ExtendWith({SoftAssertsExtension.class})
+                            class Tests {
+                              @Test
+                              void test() {
+                                Configuration.assertionMode = SOFT;
+                                open("page.html");
+                                        
+                                $("#first").should(visible).click();
+                                $("#second").should(visible).click();
+                              }
+                            }""";
             $$(".heading-element").filterBy(text("Junit5")).shouldHave((sizeGreaterThan(0)));
             $$(".overflow-auto").shouldHave(itemWithText(junit5CodeExample));
         }
